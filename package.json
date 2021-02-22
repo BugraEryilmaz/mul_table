@@ -1,0 +1,23 @@
+{
+  "name": "mul_table",
+  "version": "1.0.0",
+  "description": "a website for questions about multiplication table",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BugraEryilmaz/mul_table.git"
+  },
+  "author": "Buğra Eryılmaz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BugraEryilmaz/mul_table/issues"
+  },
+  "homepage": "https://github.com/BugraEryilmaz/mul_table#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {}
+}
