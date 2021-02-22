@@ -157,7 +157,7 @@
                 $('#timer').text(Math.floor(seconds / 60) + ':' + (seconds % 60));
             else
                 $('#timer').text(Math.floor(seconds / 60) + ':0' + (seconds % 60));
-            $('#score').text(points);
+            $('#score').text('Puan ' + points);
             gen();
         }
 
@@ -173,7 +173,7 @@
                 points -= 5;
                 $('#question_body').css({ "border": "1vw solid red" });
             }
-            $('#score').text(points);
+            $('#score').text('Puan ' + points);
             gen();
         });
 
