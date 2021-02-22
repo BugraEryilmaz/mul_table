@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<link rel="stylesheet" href="style.css">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="question">
+        <div id="fHalf">
+            <img src="hand.png" id="first0" hidden>
+            <h2 id="komsu" hidden>4 16
+            </h2>
+            <div id="linethrough" style="color: red; text-decoration: none;">
+                <h2 id="first1">56
+            </div>
+            </h2>
+            <h2 id="second2">7</h2>
+            <img src="plus.png" id="plus">
+            <hr id="line">
+            <input id="IN" type="tel" autofocus>
+        </div>
+
+        <div id="sHalf">
+            <button id="eldeButton" type="button" class="elde">Elde 1</button>
+            <button id="komsuButton" type="button" class="elde">Komuşudan 10'luk al</button>
+            <button id="sonucButton" type="button" class="sonuc">Sonucu Göster</button>
+            <button id="checkButton" type="button" class="sonuc">Sonucu Karşılaştır</button>
+        </div>
+    </div>
+    <button type="button" id="prev">Önceki</button>
+    <button type="button" id="next">Sonraki</button>
+    <input type="checkbox" id="mul" name="vehicle1" value="Bike">
+    <label for="vehicle1"> 4 işlem </label>
+    <input type="checkbox" id="hundred" name="vehicle2" value="Bike">
+    <label for="vehicle2"> 100'den büyük sonuç </label>
+    <input type="checkbox" id="ten" name="vehicle3" value="Bike">
+    <label for="vehicle3"> 10'den küçük sayılar olmasın</label>
+
+
+    <script type="text/javascript">
+
+        var numbers = [];
+        var i = 0;
+        function ran(start, end) {
+            return Math.floor(Math.random() * (end - start)) + start;
+        }
+
+        const operatorEnum = {
+            PLUS: 1,
+            MINUS: 2,
+            MULT: 3,
+            DIV: 4,
+        };
+
+        function gen() {
+            for (let index = 0; index < 50; index++) {
+                var operator = Math.floor(Math.random() * 4) + 1;
+                var element1;
+                var element2;
+                var element3;
+                while (1) {
+                    element1 = Math.floor(Math.random() * 100);
+                    var hun = 100;
+                    if ($('#hundred').is(':checked'))
+                        hun *= 10;
+
+                    if (operator == operatorEnum.DIV) {
+                        if (100 / element1 - 1 < 10 || element1 == 0)
+                            continue;
+                        if (!$('#mul').is(':checked')) {
+                            operator = Math.floor(Math.random() * 4) + 1;
+                            continue;
+                        }
+
+
+                        element2 = ran(1, hun / element1) * element1;
+                        element3 = element2 / element1;
+                    } else if (operator == operatorEnum.MINUS) {
+                        element2 = ran(1, 100);
+                        element3 = Math.abs(element2 - element1);
+
+                    } else if (operator == operatorEnum.MULT) {
+                        if (100 / element1 - 1 < 10 || element1 == 0)
+                            continue;
+
+                        if (!$('#mul').is(':checked')) {
+                            operator = Math.floor(Math.random() * 4) + 1;
+                            continue;
+                        }
+                        element2 = ran(1, hun / element1);
+                        element3 = element2 * element1;
+
+                    } else {
+                        if (element1 > 80)
+                            continue;
+                        if (hun == 100)
+                            element2 = ran(0, 100 - element1);
+                        else
+                            element2 = ran(0, 100);
+
+                        element3 = element2 + element1;
+                    }
+                    break;
+                }
+
+                if ($('#ten').is(':checked') && (element1 < 10 || element2 < 10)) {
+                    index--;
+                    continue;
+                }
+
+                numbers.push([operator, element2 > element1 ? element2 : element1, element2 > element1 ? element1 : element2, element3]);
+            }
+
+        }
+
+        function write() {
+            if (numbers[i][0] == operatorEnum.PLUS) {
+                $('#plus').attr("src", "plus.png");
+                $('#eldeButton').removeAttr('hidden');
+                $('#komsuButton').attr('hidden', '');
+            }
+            else if (numbers[i][0] == operatorEnum.MULT) {
+                $('#eldeButton').attr('hidden', '');
+                $('#plus').attr("src", "mul.png");
+                $('#komsuButton').attr('hidden', '');
+            }
+            else if (numbers[i][0] == operatorEnum.DIV) {
+                $('#eldeButton').attr('hidden', '');
+                $('#plus').attr("src", "div.png");
+                $('#komsuButton').attr('hidden', '');
+            }
+            else if (numbers[i][0] == operatorEnum.MINUS) {
+                $('#eldeButton').attr('hidden', '');
+                $('#plus').attr("src", "minus.png");
+                $('#komsuButton').removeAttr('hidden');
+            }
+            else {
+                $('#eldeButton').attr('hidden', '');
+                $('#plus').attr("src", "");
+                $('#komsuButton').attr('hidden', '');
+            }
+
+            $('#first1').text(numbers[i][1]);
+            $('#second2').text(numbers[i][2]);
+            $('#IN').val('');
+            $('#checkButton').css('background-color', '');
+            $('#first0').attr('hidden', '');
+            $('#linethrough').css('text-decoration', "none");
+            $('#komsu').attr('hidden', '');
+        }
+
+        gen();
+        write();
+
+        $('#prev').click(() => {
+            i--;
+            if (i < 0) i = 0;
+            write();
+
+        });
+
+        $('#eldeButton').click(() => {
+            if ($('#first0').is('[hidden]')) {
+                $('#first0').removeAttr('hidden');
+            } else {
+                $('#first0').attr('hidden', '');
+            }
+        });
+        $('#komsuButton').click(() => {
+            if ($('#komsu').is('[hidden]')) {
+                $('#komsu').removeAttr('hidden');
+            } else {
+                $('#komsu').attr('hidden', '');
+            }
+            if ($('#linethrough').css('text-decoration').startsWith("none")) {
+                $('#linethrough').css('text-decoration', "line-through");
+            } else
+                $('#linethrough').css('text-decoration', "none");
+            var first = Math.floor(numbers[i][1] / 10 - 1).toString();
+            $('#komsu').text(first + " 1" + (numbers[i][1] % 10).toString());
+        });
+
+        $('#next').click(() => {
+            i++;
+            if (i >= numbers.length) gen();
+            write();
+        });
+
+        $('#mul').change(() => {
+            numbers = [];
+            i = 0;
+            gen();
+            write();
+        });
+        $('#ten').change(() => {
+            numbers = [];
+            i = 0;
+            gen();
+            write();
+        });
+        $('#hundred').change(() => {
+            numbers = [];
+            i = 0;
+            gen();
+            write();
+        });
+        $('#IN').keypress((key) => {
+            key.preventDefault();
+            if (isFinite(key.key)) {
+                console.log(key.key + $('#IN').val());
+                $('#IN').val(key.key + $('#IN').val());
+            }
+        });
+
+        $('#sonucButton').click(() => {
+            console.log(numbers[i][3]);
+            $('#IN').val(numbers[i][3]);
+        });
+        $('#checkButton').click(() => {
+            if ($('#IN').val() == numbers[i][3]) {
+                $('#checkButton').css('background-color', 'green');
+            } else {
+                $('#checkButton').css('background-color', 'red');
+            }
+        });
+        $('html').keypress((key) => {
+            console.log(key.key + $('#IN').val());
+            switch (key.key) {
+                case '+':
+                    i++;
+                    if (i >= numbers.length) gen();
+                    write();
+                    break;
+                case '-':
+                    i--;
+                    if (i < 0) i = 0;
+                    write();
+                    break;
+
+                case 'Enter':
+                    if ($('#IN').val() == numbers[i][3]) {
+                        $('#checkButton').css('background-color', 'green');
+                    } else {
+                        $('#checkButton').css('background-color', 'red');
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+        });
+
+    </script>
+</body>
+
+</html>
