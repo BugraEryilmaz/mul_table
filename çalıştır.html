@@ -9,205 +9,211 @@
 </head>
 
 <body>
-    <div id="question">
-        <div id="fHalf">
-            <img src="hand.png" id="first0" hidden>
-            <h2 id="komsu" hidden>4 16
+    <div id="End">
+        <div class="stats">
+            <h2>
             </h2>
-            <div id="linethrough" style="color: red; text-decoration: none;">
-                <h2 id="first1">56
-            </div>
+            <h2 id="score_end">Puan: 0
             </h2>
-            <h2 id="second2">7</h2>
-            <img src="plus.png" id="plus">
-            <hr id="line">
-            <input id="IN" type="tel" autofocus>
+            <h2>
+            </h2>
         </div>
-
-        <div id="sHalf">
-            <button id="eldeButton" type="button" class="elde">Elde 1</button>
-            <button id="komsuButton" type="button" class="elde">Komuşudan 10'luk al</button>
-            <button id="sonucButton" type="button" class="sonuc">Sonucu Göster</button>
-            <button id="checkButton" type="button" class="sonuc">Sonucu Karşılaştır</button>
+        <div class="stats">
+            <h2>
+            </h2>
+            <button id="restart" type="button" class="answer_end">
+                Tekrar Oyna
+            </button>
+            <h2>
+            </h2>
         </div>
     </div>
-    <button type="button" id="prev">Önceki</button>
-    <button type="button" id="next">Sonraki</button>
-    <input type="checkbox" id="mul" name="vehicle1" value="Bike">
-    <label for="vehicle1"> 4 işlem </label>
-    <input type="checkbox" id="hundred" name="vehicle2" value="Bike">
-    <label for="vehicle2"> 100'den büyük sonuç </label>
-    <input type="checkbox" id="ten" name="vehicle3" value="Bike">
-    <label for="vehicle3"> 10'den küçük sayılar olmasın</label>
+    <div id="Game" hidden>
+        <div class="stats">
+            <h2>
+            </h2>
+            <h2 id="score">0
+            </h2>
+            <h2 id="timer">2:00
+            </h2>
+        </div>
+        <div id="question_body">
+            <div id="question">
+                <img src="hand.png" id="first0" hidden>
+                <h2>
+                </h2>
+                <h2 id="quest">56
+                </h2>
+                <h2>
+                </h2>
+            </div>
+
+            <div id="answers">
+                <button id="2" name="2" type="button" class="answer">A) 5</button>
+                <button id="3" name="3" type="button" class="answer">B) 10</button>
+                <button id="4" name="4" type="button" class="answer">C) 15</button>
+                <button id="5" name="5" type="button" class="answer three" hidden>D)25</button>
+                <button id="6" name="6" type="button" class="answer three four" hidden>E)35</button>
+            </div>
+        </div>
+    </div>
+    <div id="config">
+
+    </div>
+    <h2>
+        Hangi sayılardan soru gelsin?
+    </h2>
+    <div class="options">
+        <input type="checkbox" id="one" name="1" checked="True" class="whichnumbers">
+        <label for="1"> 1 </label>
+        <input type="checkbox" id="two" name="2" checked="True" class="whichnumbers">
+        <label for="2"> 2 </label>
+        <input type="checkbox" id="three" name="3" checked="True" class="whichnumbers">
+        <label for="3"> 3</label>
+        <input type="checkbox" id="four" name="4" checked="True" class="whichnumbers">
+        <label for="4"> 4 </label>
+        <input type="checkbox" id="five" name="5" checked="True" class="whichnumbers">
+        <label for="5"> 5 </label>
+        <input type="checkbox" id="six" name="6" class="whichnumbers">
+        <label for="6"> 6</label>
+        <input type="checkbox" id="seven" name="7" class="whichnumbers">
+        <label for="7"> 7 </label>
+        <input type="checkbox" id="eigth" name="8" class="whichnumbers">
+        <label for="8"> 8 </label>
+        <input type="checkbox" id="nine" name="9" class="whichnumbers">
+        <label for="9"> 9</label>
+        <input type="checkbox" id="ten" name="10" class="whichnumbers">
+        <label for="10"> 10</label>
+    </div>
+    <h2>
+        Kaç şık olsun?
+    </h2>
+    <div class="options">
+        <input type="radio" id="3Option" name="HowManyOptions" checked="True" class="numberofoptions">
+        <label for="3Option"> 3 </label>
+        <input type="radio" id="4Option" name="HowManyOptions" class="numberofoptions">
+        <label for="4Option"> 4 </label>
+        <input type="radio" id="5Option" name="HowManyOptions" class="numberofoptions">
+        <label for="5Option"> 5</label>
+    </div>
 
 
     <script type="text/javascript">
 
         var numbers = [];
+        var seconds = 120;
+        var available_numbers = [1, 2, 3, 4, 5];
+        var number_of_options = 3;
+        var points = 0;
+        var correct = 0;
         var i = 0;
+
         function ran(start, end) {
             return Math.floor(Math.random() * (end - start)) + start;
         }
 
-        const operatorEnum = {
-            PLUS: 1,
-            MINUS: 2,
-            MULT: 3,
-            DIV: 4,
-        };
-
         function gen() {
-            for (let index = 0; index < 50; index++) {
-                var operator = Math.floor(Math.random() * 4) + 1;
-                var element1;
-                var element2;
-                var element3;
-                while (1) {
-                    element1 = Math.floor(Math.random() * 100);
-                    var hun = 100;
-                    if ($('#hundred').is(':checked'))
-                        hun *= 10;
-
-                    if (operator == operatorEnum.DIV) {
-                        if (100 / element1 - 1 < 10 || element1 == 0)
-                            continue;
-                        if (!$('#mul').is(':checked')) {
-                            operator = Math.floor(Math.random() * 4) + 1;
-                            continue;
-                        }
-
-
-                        element2 = ran(1, hun / element1) * element1;
-                        element3 = element2 / element1;
-                    } else if (operator == operatorEnum.MINUS) {
-                        element2 = ran(1, 100);
-                        element3 = Math.abs(element2 - element1);
-
-                    } else if (operator == operatorEnum.MULT) {
-                        if (100 / element1 - 1 < 10 || element1 == 0)
-                            continue;
-
-                        if (!$('#mul').is(':checked')) {
-                            operator = Math.floor(Math.random() * 4) + 1;
-                            continue;
-                        }
-                        element2 = ran(1, hun / element1);
-                        element3 = element2 * element1;
-
-                    } else {
-                        if (element1 > 80)
-                            continue;
-                        if (hun == 100)
-                            element2 = ran(0, 100 - element1);
-                        else
-                            element2 = ran(0, 100);
-
-                        element3 = element2 + element1;
-                    }
-                    break;
-                }
-
-                if ($('#ten').is(':checked') && (element1 < 10 || element2 < 10)) {
-                    index--;
-                    continue;
-                }
-
-                numbers.push([operator, element2 > element1 ? element2 : element1, element2 > element1 ? element1 : element2, element3]);
+            numbers = [];
+            const first = available_numbers[ran(0, available_numbers.length)];
+            const second = ran(1, 10);
+            for (var i = 0; i < 4; i++) {
+                const first_loop = available_numbers[ran(0, available_numbers.length)];
+                const second_loop = ran(1, 10);
+                const index = numbers.indexOf(first_loop * second_loop);
+                if (!(index > -1 || first * second == first_loop * second_loop))
+                    numbers.push(first_loop * second_loop);
+                else
+                    i--;
             }
-
+            numbers.splice(0, 0, first);
+            numbers.splice(1, 0, second);
+            const index = ran(0, number_of_options) + 2;
+            correct = index;
+            numbers.splice(index, 0, first * second);
+            write();
         }
 
         function write() {
-            if (numbers[i][0] == operatorEnum.PLUS) {
-                $('#plus').attr("src", "plus.png");
-                $('#eldeButton').removeAttr('hidden');
-                $('#komsuButton').attr('hidden', '');
-            }
-            else if (numbers[i][0] == operatorEnum.MULT) {
-                $('#eldeButton').attr('hidden', '');
-                $('#plus').attr("src", "mul.png");
-                $('#komsuButton').attr('hidden', '');
-            }
-            else if (numbers[i][0] == operatorEnum.DIV) {
-                $('#eldeButton').attr('hidden', '');
-                $('#plus').attr("src", "div.png");
-                $('#komsuButton').attr('hidden', '');
-            }
-            else if (numbers[i][0] == operatorEnum.MINUS) {
-                $('#eldeButton').attr('hidden', '');
-                $('#plus').attr("src", "minus.png");
-                $('#komsuButton').removeAttr('hidden');
-            }
-            else {
-                $('#eldeButton').attr('hidden', '');
-                $('#plus').attr("src", "");
-                $('#komsuButton').attr('hidden', '');
-            }
+            $('#quest').text(numbers[0] + ' x ' + numbers[1]);
+            $('#2').text(numbers[2]);
+            $('#3').text(numbers[3]);
+            $('#4').text(numbers[4]);
+            $('#5').text(numbers[5]);
+            $('#6').text(numbers[6]);
+        }
 
-            $('#first1').text(numbers[i][1]);
-            $('#second2').text(numbers[i][2]);
-            $('#IN').val('');
-            $('#checkButton').css('background-color', '');
-            $('#first0').attr('hidden', '');
-            $('#linethrough').css('text-decoration', "none");
-            $('#komsu').attr('hidden', '');
+        function timeUp() {
+            $('#score_end').text(points);
+            $('#Game').hide();
+            $('#End').show();
+        }
+
+        function Restart() {
+            $('#Game').show();
+            $('#End').hide();
+            seconds = 120;
+            points = 0;
+            if ((seconds % 60) / 10 >= 1)
+                $('#timer').text(Math.floor(seconds / 60) + ':' + (seconds % 60));
+            else
+                $('#timer').text(Math.floor(seconds / 60) + ':0' + (seconds % 60));
+            $('#score').text(points);
+            gen();
         }
 
         gen();
-        write();
 
-        $('#prev').click(() => {
-            i--;
-            if (i < 0) i = 0;
-            write();
-
-        });
-
-        $('#eldeButton').click(() => {
-            if ($('#first0').is('[hidden]')) {
-                $('#first0').removeAttr('hidden');
-            } else {
-                $('#first0').attr('hidden', '');
+        $('.answer').click(() => {
+            const id = Number($(event.target).attr('name'));
+            if (id == correct) {
+                points += 10;
+                $('#question_body').css({ "border": "1vw solid green" });
             }
-        });
-        $('#komsuButton').click(() => {
-            if ($('#komsu').is('[hidden]')) {
-                $('#komsu').removeAttr('hidden');
-            } else {
-                $('#komsu').attr('hidden', '');
+            else {
+                points -= 5;
+                $('#question_body').css({ "border": "1vw solid red" });
             }
-            if ($('#linethrough').css('text-decoration').startsWith("none")) {
-                $('#linethrough').css('text-decoration', "line-through");
-            } else
-                $('#linethrough').css('text-decoration', "none");
-            var first = Math.floor(numbers[i][1] / 10 - 1).toString();
-            $('#komsu').text(first + " 1" + (numbers[i][1] % 10).toString());
+            $('#score').text(points);
+            gen();
         });
 
-        $('#next').click(() => {
-            i++;
-            if (i >= numbers.length) gen();
-            write();
+        $('#restart').click(() => {
+            Restart();
         });
 
-        $('#mul').change(() => {
-            numbers = [];
-            i = 0;
+        $('.whichnumbers').change(() => {
+            const id = Number($(event.target).attr('name'));
+            if ($(event.target).is(':checked')) {
+                available_numbers.push(id);
+            }
+            else {
+                const index = available_numbers.indexOf(id);
+                if (index > -1) {
+                    available_numbers.splice(index, 1);
+                }
+            }
             gen();
-            write();
         });
-        $('#ten').change(() => {
-            numbers = [];
-            i = 0;
+
+        $('.numberofoptions').change(() => {
+            const id = Number(event.target.id[0]);
+            if ($(event.target).is(':checked')) {
+                number_of_options = id;
+                if (id == 3) {
+                    $('.three').hide();
+                    console.log(3);
+                } else if (id == 4) {
+                    $('.three').show();
+                    $('.four').hide();
+                    console.log(4);
+                } else {
+                    $('.three').show();
+                    console.log(5);
+                }
+            }
             gen();
-            write();
         });
-        $('#hundred').change(() => {
-            numbers = [];
-            i = 0;
-            gen();
-            write();
-        });
+
         $('#IN').keypress((key) => {
             key.preventDefault();
             if (isFinite(key.key)) {
@@ -216,43 +222,16 @@
             }
         });
 
-        $('#sonucButton').click(() => {
-            console.log(numbers[i][3]);
-            $('#IN').val(numbers[i][3]);
-        });
-        $('#checkButton').click(() => {
-            if ($('#IN').val() == numbers[i][3]) {
-                $('#checkButton').css('background-color', 'green');
-            } else {
-                $('#checkButton').css('background-color', 'red');
-            }
-        });
-        $('html').keypress((key) => {
-            console.log(key.key + $('#IN').val());
-            switch (key.key) {
-                case '+':
-                    i++;
-                    if (i >= numbers.length) gen();
-                    write();
-                    break;
-                case '-':
-                    i--;
-                    if (i < 0) i = 0;
-                    write();
-                    break;
+        setInterval(() => {
+            seconds--;
+            if ((seconds % 60) / 10 >= 1)
+                $('#timer').text(Math.floor(seconds / 60) + ':' + (seconds % 60));
+            else
+                $('#timer').text(Math.floor(seconds / 60) + ':0' + (seconds % 60));
 
-                case 'Enter':
-                    if ($('#IN').val() == numbers[i][3]) {
-                        $('#checkButton').css('background-color', 'green');
-                    } else {
-                        $('#checkButton').css('background-color', 'red');
-                    }
-                    break;
-                default:
-                    break;
-            }
-
-        });
+            if (seconds < 1)
+                timeUp();
+        }, 1000);
 
     </script>
 </body>

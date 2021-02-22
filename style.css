@@ -3,82 +3,62 @@ body{
     max-width: 100%;
 }
 
-#first0 {
-    width: 9vw;
-    float:  right;
-    margin-right: 43%;
-    margin-bottom:-12%; 
-    margin-top: 0%;
-    color: black;
+#End {
+    margin-top: 15%;
 }
-#question {
+
+#score_end {
+    font-size: 7vw;
+}
+
+.answer_end {
+    width: 20vw;   
+    height: 8vw;   
+    font-size: 3vw;
+    margin-bottom: 3%;
+}
+
+#question_body {
     display: grid;    
-    grid-template-columns: 80% 20%;
+    grid-template-columns: 100%;
     
-    border: 5px solid black; 
+    border: 1vw solid black; 
 }
 
-#eldeButton {
-    margin-top: 70%;
-    width: 90%;
-    font-size: 3vw; 
-}
-#komsuButton {
-    margin-top: 53%;
-    width: 90%;
-    font-size: 3vw; 
-}
-.sonuc {
-    margin-top: 10%;
-    width: 90%;
-    font-size: 3.8vw; 
+#question {
+    width: 70%;    
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: -3%;
+    margin-bottom: -3%;
 }
 
-#first1 {
+.answer {
+    width: 12vw;   
+    height: 4vw;   
+    font-size: 3vw;
+    margin-bottom: 3%;
+}
+
+#answers {
+    width: 70%;    
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.stats {
+    font-size: 3vw;
+    width: 70%;    
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: -3%;
+    margin-bottom: -3%;
+}
+
+#quest {
     font-size:10vw; 
-    text-align:right; 
-    margin-right:40%; 
-    margin-top:9%;
-    margin-bottom:-2%; 
     color: black;
-}
-
-#komsu {
-    font-size:5.5vw; 
-    text-align:right; 
-    margin-right:40%; 
-    margin-top:4%;
-    margin-bottom:-12%; 
-    color: red;
-}
-
-#second2 {
-    font-size:10vw; 
-    text-align:right; 
-    margin-right:40%; 
-    margin-top:0;
-    margin-bottom:-2%; 
-    color: black;
-}
-
-#line {
-    max-width:40%; 
-    border-top:2vw solid black;
-}
-
-#IN {
-    max-width:20%; 
-    text-align: right; 
-    font-size: 10vw; 
-    border: none;
-    margin-left: 40%;
-    margin-right: 40%;
-    font-weight: bold;
-}
-
-#plus {
-    margin-top: -2%;
-    margin-bottom: 0%;
-    margin-left: 30%;
-    width: 5vw;
 }
