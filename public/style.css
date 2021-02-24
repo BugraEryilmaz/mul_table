@@ -1,6 +1,13 @@
 body{
-    background-color: white;
     max-width: 100%;
+}
+html {
+    height: 100%;
+    width: 100%;
+    background-image: url('hayri.jpeg');
+    background-size: 20%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
 }
 
 #End {
