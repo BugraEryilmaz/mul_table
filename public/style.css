@@ -38,7 +38,6 @@ body{
     width: 12vw;   
     height: 4vw;   
     font-size: 3vw;
-    margin-bottom: 3%;
 }
 
 #answers {
@@ -58,7 +57,24 @@ body{
     margin-bottom: -3%;
 }
 
+#finish_game {
+    margin-top: 6%;
+}
+
 #quest {
     font-size:10vw; 
     color: black;
+}
+
+#timing {
+    text-align: center;
+}
+
+.timing_set {
+    display: inline;
+}
+
+.timing_button {
+    max-width:10%; 
+    font-size: 5vw; 
 }

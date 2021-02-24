@@ -13,6 +13,18 @@
         <div class="stats">
             <h2>
             </h2>
+            <div id="timing">
+                <h2 class="timing_set">Süreyi belirleyin </h2>
+                <input class="timing_set timing_button" id="dk" type="tel" value="1">
+                <h2 class="timing_set">:</h2>
+                <input class="timing_set timing_button" id="sn" type="tel" value="00">
+            </div>
+            <h2>
+            </h2>
+        </div>
+        <div class="stats">
+            <h2>
+            </h2>
             <h2 id="score_end">Puan 0
             </h2>
             <h2>
@@ -27,11 +39,47 @@
             <h2>
             </h2>
         </div>
+        <h2>
+            Hangi sayılardan soru gelsin?
+        </h2>
+        <div class="options">
+            <input type="checkbox" id="one" name="1" checked="True" class="whichnumbers">
+            <label for="1"> 1 </label>
+            <input type="checkbox" id="two" name="2" checked="True" class="whichnumbers">
+            <label for="2"> 2 </label>
+            <input type="checkbox" id="three" name="3" checked="True" class="whichnumbers">
+            <label for="3"> 3</label>
+            <input type="checkbox" id="four" name="4" checked="True" class="whichnumbers">
+            <label for="4"> 4 </label>
+            <input type="checkbox" id="five" name="5" checked="True" class="whichnumbers">
+            <label for="5"> 5 </label>
+            <input type="checkbox" id="six" name="6" class="whichnumbers">
+            <label for="6"> 6</label>
+            <input type="checkbox" id="seven" name="7" class="whichnumbers">
+            <label for="7"> 7 </label>
+            <input type="checkbox" id="eigth" name="8" class="whichnumbers">
+            <label for="8"> 8 </label>
+            <input type="checkbox" id="nine" name="9" class="whichnumbers">
+            <label for="9"> 9</label>
+            <input type="checkbox" id="ten" name="10" class="whichnumbers">
+            <label for="10"> 10</label>
+        </div>
+        <h2>
+            Kaç şık olsun?
+        </h2>
+        <div class="options">
+            <input type="radio" id="3Option" name="HowManyOptions" checked="True" class="numberofoptions">
+            <label for="3Option"> 3 </label>
+            <input type="radio" id="4Option" name="HowManyOptions" class="numberofoptions">
+            <label for="4Option"> 4 </label>
+            <input type="radio" id="5Option" name="HowManyOptions" class="numberofoptions">
+            <label for="5Option"> 5</label>
+        </div>
+
     </div>
     <div id="Game" hidden>
         <div class="stats">
-            <h2>
-            </h2>
+            <button id="finish_game" name="finish" type="button" class="answer">Bitir</button>
             <h2 id="score">Puan 0
             </h2>
             <h2 id="timer">2:00
@@ -60,48 +108,12 @@
     <div id="config">
 
     </div>
-    <h2>
-        Hangi sayılardan soru gelsin?
-    </h2>
-    <div class="options">
-        <input type="checkbox" id="one" name="1" checked="True" class="whichnumbers">
-        <label for="1"> 1 </label>
-        <input type="checkbox" id="two" name="2" checked="True" class="whichnumbers">
-        <label for="2"> 2 </label>
-        <input type="checkbox" id="three" name="3" checked="True" class="whichnumbers">
-        <label for="3"> 3</label>
-        <input type="checkbox" id="four" name="4" checked="True" class="whichnumbers">
-        <label for="4"> 4 </label>
-        <input type="checkbox" id="five" name="5" checked="True" class="whichnumbers">
-        <label for="5"> 5 </label>
-        <input type="checkbox" id="six" name="6" class="whichnumbers">
-        <label for="6"> 6</label>
-        <input type="checkbox" id="seven" name="7" class="whichnumbers">
-        <label for="7"> 7 </label>
-        <input type="checkbox" id="eigth" name="8" class="whichnumbers">
-        <label for="8"> 8 </label>
-        <input type="checkbox" id="nine" name="9" class="whichnumbers">
-        <label for="9"> 9</label>
-        <input type="checkbox" id="ten" name="10" class="whichnumbers">
-        <label for="10"> 10</label>
-    </div>
-    <h2>
-        Kaç şık olsun?
-    </h2>
-    <div class="options">
-        <input type="radio" id="3Option" name="HowManyOptions" checked="True" class="numberofoptions">
-        <label for="3Option"> 3 </label>
-        <input type="radio" id="4Option" name="HowManyOptions" class="numberofoptions">
-        <label for="4Option"> 4 </label>
-        <input type="radio" id="5Option" name="HowManyOptions" class="numberofoptions">
-        <label for="5Option"> 5</label>
-    </div>
-
 
     <script type="text/javascript">
 
         var numbers = [];
         var seconds = 120;
+        var second_def = 60;
         var available_numbers = [1, 2, 3, 4, 5];
         var number_of_options = 3;
         var points = 0;
@@ -151,7 +163,7 @@
         function Restart() {
             $('#Game').show();
             $('#End').hide();
-            seconds = 120;
+            seconds = second_def;
             points = 0;
             if ((seconds % 60) / 10 >= 1)
                 $('#timer').text(Math.floor(seconds / 60) + ':' + (seconds % 60));
@@ -164,7 +176,12 @@
         gen();
 
         $('.answer').click(() => {
-            const id = Number($(event.target).attr('name'));
+            const name = $(event.target).attr('name');
+            if (name == "finish") {
+                timeUp();
+                return;
+            }
+            const id = Number(name);
             if (id == correct) {
                 points += 10;
                 $('#question_body').css({ "border": "1vw solid green" });
@@ -214,12 +231,8 @@
             gen();
         });
 
-        $('#IN').keypress((key) => {
-            key.preventDefault();
-            if (isFinite(key.key)) {
-                console.log(key.key + $('#IN').val());
-                $('#IN').val(key.key + $('#IN').val());
-            }
+        $('.timing_set').change(() => {
+            second_def = Number($('#dk').val()) * 60 + Number($('#sn').val());
         });
 
         setInterval(() => {
