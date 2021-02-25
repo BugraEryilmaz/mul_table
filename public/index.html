@@ -13,7 +13,7 @@
         <div class="stats">
             <h2>
             </h2>
-            <div id="timing">
+            <div class="timing">
                 <h2 class="timing_set">Süreyi belirleyin </h2>
                 <input class="timing_set timing_button" id="dk" type="tel" value="1">
                 <h2 class="timing_set">:</h2>
@@ -29,6 +29,88 @@
             </h2>
             <h2>
             </h2>
+        </div>
+        <div class="HighScoreBefore">
+            <div class="stats">
+                <h2>
+                </h2>
+                <div class="timing">
+                    <h2 class="timing_set">İsminizi girin:
+                    </h2>
+                    <input class="timing_set name_field" id="name" type="tel">
+                </div>
+                <h2>
+                </h2>
+            </div>
+            <div class="stats">
+                <h2>
+                </h2>
+                <button id="dont" type="button" class="HighScore">
+                    Puanımı gönderme
+                </button>
+                <button id="send" type="button" class="HighScore">
+                    Puanımı gönder
+                </button>
+                <h2>
+                </h2>
+            </div>
+        </div>
+        <div class="HighScoreAfter" hidden>
+            <div class="stats">
+                <h2>
+                </h2>
+                <div>
+                    <div class="stats">
+                        <div class="1wrapper">
+                            <img class="leaderboard" src="firstplace.png" width="18%">
+                            <h2 class="leaderboard" id="1name">Buğra </h2>
+                        </div>
+                        <div class="1wrapper">
+                            <h2 class="leaderboard" id="1score">326</h2>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="1wrapper">
+                            <img class="leaderboard" src="secondplace.png" width="18%">
+                            <h2 class="leaderboard" id="2name">Buğra </h2>
+                        </div>
+                        <div class="1wrapper">
+                            <h2 class="leaderboard" id="2score">326</h2>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="2wrapper">
+                            <img class="leaderboard" src="thirdplace.png" width="18%">
+                            <h2 class="leaderboard" id="3name">Buğra </h2>
+                        </div>
+                        <div class="2wrapper">
+                            <h2 class="leaderboard" id="3score">326</h2>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="3wrapper">
+                            <h2 class="leaderboard">4. </h2>
+                            <h2 class="leaderboard" id="4name">Buğra </h2>
+                        </div>
+                        <div class="3wrapper">
+                            <h2 class="leaderboard" id="4score">326</h2>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="4wrapper">
+                            <h2 class="leaderboard">5. </h2>
+                            <h2 class="leaderboard" id="5name">Buğra </h2>
+                        </div>
+                        <div class="4wrapper">
+                            <h2 class="leaderboard" id="5score">326</h2>
+                        </div>
+                    </div>
+                </div>
+                </h2>
+                <h2>
+                </h2>
+            </div>
+
         </div>
         <div class="stats">
             <h2>
@@ -117,6 +199,7 @@
         var second_def = 60;
         var available_numbers = [1, 2, 3, 4, 5];
         var number_of_options = 3;
+        var options = number_of_options;
         var points = 0;
         var correct = 0;
         var i = 0;
@@ -155,10 +238,32 @@
             $('#6').text(numbers[6]);
         }
 
+        function sendScore(name, score, options) {
+            var xhr = new XMLHttpRequest();
+            const URL = 'api/highscore';
+            xhr.open("POST", URL, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () {
+                if (this.readyState != 4) return;
+
+                if (this.status == 200) {
+                    $('.HighScoreBefore').hide();
+                    getLeaderBoard();
+                }
+            };
+            xhr.send(JSON.stringify({
+                'name': name,
+                'options': options,
+                'score': score
+            }));
+        }
+
         function timeUp() {
             $('#score_end').text('Puan ' + points);
             $('#Game').hide();
             $('#End').show();
+            $('.HighScoreBefore').show();
+            $('.HighScoreAfter').hide();
         }
 
         function Restart() {
@@ -172,6 +277,37 @@
                 $('#timer').text(Math.floor(seconds / 60) + ':0' + (seconds % 60));
             $('#score').text('Puan ' + points);
             gen();
+            options = number_of_options;
+        }
+
+        function getLeaderBoard() {
+            var xhr = new XMLHttpRequest();
+            const URL = 'api/highscoreget';
+            xhr.open("POST", URL, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () {
+                if (this.readyState != 4) return;
+
+                if (this.status == 200) {
+                    var data = JSON.parse(this.responseText);
+                    for (let index = 0; index < 5; index++) {
+                        if (index >= data.length) {
+                            $('.' + (index + 1) + 'wrapper').hide();
+                        } else {
+                            $('.' + (index + 1) + 'wrapper').show();
+                            $('#' + (index + 1) + 'name').text(data[index].name);
+                            $('#' + (index + 1) + 'score').text(data[index].score);
+
+                        }
+
+                    }
+                    $('.HighScoreAfter').show();
+                    // we get the returned data
+                }
+            };
+            xhr.send(JSON.stringify({
+                'options': options
+            }));
         }
 
         gen();
@@ -184,12 +320,12 @@
             }
             const id = Number(name);
             if (id == correct) {
-                points += 10;
+                points += Math.floor(10 * 60 / second_def);
                 $('#question_body').css({ "border": "1vw solid green" });
                 correctaudio.play();
             }
             else {
-                points -= 5;
+                points -= Math.floor(5 * 60 / second_def);
                 $('#question_body').css({ "border": "1vw solid red" });
                 wrong.play();
             }
@@ -197,7 +333,27 @@
             gen();
         });
 
+        $('.HighScore').click(() => {
+            if (event.target.id == 'send') {
+                const name = $('#name').val();
+                sendScore(name, points);
+            }
+            else {
+                $('.HighScoreBefore').hide();
+                getLeaderBoard();
+            }
+        });
+
         $('#restart').click(() => {
+            if (second_def < 30) {
+                $('#sn').css({ "border": "0.2vw solid red" });
+                $('#sn').attr("Title", "En az 30 saniye!");
+                return;
+            }
+            else {
+                $('#sn').css({ "border": "" });
+                $('#sn').removeAttr("Title");
+            }
             Restart();
         });
 
@@ -245,7 +401,7 @@
             else
                 $('#timer').text(Math.floor(seconds / 60) + ':0' + (seconds % 60));
 
-            if (seconds < 1)
+            if (seconds < 1 && $('#End').is(":hidden"))
                 timeUp();
         }, 1000);
 
