@@ -61,47 +61,47 @@
                 </h2>
                 <div>
                     <div class="stats">
-                        <div class="1wrapper">
-                            <img class="leaderboard" src="firstplace.png" width="18%">
+                        <div class="1wrapper wrapper">
+                            <img class="leaderboard" src="firstplace.png" width="min(20vw,18%)">
                             <h2 class="leaderboard" id="1name">Buğra </h2>
                         </div>
-                        <div class="1wrapper">
+                        <div class="1wrapper wrapper">
                             <h2 class="leaderboard" id="1score">326</h2>
                         </div>
                     </div>
                     <div class="stats">
-                        <div class="2wrapper">
+                        <div class="2wrapper wrapper">
                             <img class="leaderboard" src="secondplace.png" width="18%">
                             <h2 class="leaderboard" id="2name">Buğra </h2>
                         </div>
-                        <div class="2wrapper">
+                        <div class="2wrapper wrapper">
                             <h2 class="leaderboard" id="2score">326</h2>
                         </div>
                     </div>
                     <div class="stats">
-                        <div class="3wrapper">
+                        <div class="3wrapper wrapper">
                             <img class="leaderboard" src="thirdplace.png" width="18%">
                             <h2 class="leaderboard" id="3name">Buğra </h2>
                         </div>
-                        <div class="3wrapper">
+                        <div class="3wrapper wrapper">
                             <h2 class="leaderboard" id="3score">326</h2>
                         </div>
                     </div>
                     <div class="stats">
-                        <div class="4wrapper">
+                        <div class="4wrapper wrapper">
                             <h2 class="leaderboard">4. </h2>
                             <h2 class="leaderboard" id="4name">Buğra </h2>
                         </div>
-                        <div class="4wrapper">
+                        <div class="4wrapper wrapper">
                             <h2 class="leaderboard" id="4score">326</h2>
                         </div>
                     </div>
                     <div class="stats">
-                        <div class="5wrapper">
+                        <div class="5wrapper wrapper">
                             <h2 class="leaderboard">5. </h2>
                             <h2 class="leaderboard" id="5name">Buğra </h2>
                         </div>
-                        <div class="5wrapper">
+                        <div class="5wrapper wrapper">
                             <h2 class="leaderboard" id="5score">326</h2>
                         </div>
                     </div>
@@ -336,6 +336,13 @@
         $('.HighScore').click(() => {
             if (event.target.id == 'send') {
                 const name = $('#name').val();
+                if (!name) {
+                    $('#name').css({ "border": "0.2vw solid red" });
+                    $('#name').attr("Title", "İsim boş olamaz!");
+                    return;
+                }
+                $('#name').css({ "border": "" });
+                $('#name').removeAttr("Title");
                 sendScore(name, Math.floor(points), options);
             }
             else {

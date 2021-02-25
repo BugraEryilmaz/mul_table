@@ -63,7 +63,7 @@ html {
 
 .stats {
     font-size: 3vw;
-    width: 70%;    
+    min-width: 25vw;    
     margin: auto;
     display: flex;
     justify-content: space-between;
@@ -71,8 +71,12 @@ html {
     margin-bottom: -4%;
 }
 
+.stats img {
+    width: 2.5vw;
+}
+
 #finish_game {
-    margin-top: 6%;
+    margin-top: 4%;
 }
 
 #quest {
@@ -85,7 +89,7 @@ html {
 }
 
 .timing_set, .leaderboard {
-    display: inline;
+    display:inline;
 }
 
 .leaderboard {
