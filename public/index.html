@@ -336,7 +336,7 @@
         $('.HighScore').click(() => {
             if (event.target.id == 'send') {
                 const name = $('#name').val();
-                sendScore(name, points);
+                sendScore(name, points, options);
             }
             else {
                 $('.HighScoreBefore').hide();
