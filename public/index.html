@@ -259,7 +259,7 @@
         }
 
         function timeUp() {
-            $('#score_end').text('Puan ' + points);
+            $('#score_end').text('Puan ' + Math.floor(points));
             $('#Game').hide();
             $('#End').show();
             $('.HighScoreBefore').show();
@@ -320,23 +320,23 @@
             }
             const id = Number(name);
             if (id == correct) {
-                points += Math.floor(10 * 60 / second_def);
+                points += 10 * 60 / second_def;
                 $('#question_body').css({ "border": "1vw solid green" });
                 correctaudio.play();
             }
             else {
-                points -= Math.floor(5 * 60 / second_def);
+                points -= 5 * 60 / second_def;
                 $('#question_body').css({ "border": "1vw solid red" });
                 wrong.play();
             }
-            $('#score').text('Puan ' + points);
+            $('#score').text('Puan ' + Math.floor(points));
             gen();
         });
 
         $('.HighScore').click(() => {
             if (event.target.id == 'send') {
                 const name = $('#name').val();
-                sendScore(name, points, options);
+                sendScore(name, Math.floor(points), options);
             }
             else {
                 $('.HighScoreBefore').hide();
