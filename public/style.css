@@ -72,7 +72,8 @@ html {
 }
 
 .stats img {
-    width: max(15pt, 2.5vw);
+    width: 2.5vw;
+    min-width: 13pt;
 }
 
 #finish_game {
