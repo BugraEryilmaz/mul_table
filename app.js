@@ -18,7 +18,8 @@ app.listen(PORT_NUMBER, () => {
 
 app.post('/api/highscoreget', async (req, res) => {
     const options = req.body.options;
-    const ret = await ips.find({'options': options}, { sort: { score: -1 }, limit: 5 });
+    const numbers = req.body.numbers;
+    const ret = await ips.find({'options': options, 'numbers':numbers}, { sort: { score: -1 }, limit: 10 });
     res.send(ret);
 })
 
@@ -26,22 +27,23 @@ app.post('/api/highscore', async (req, res) => {
     const score = req.body.score;
     const name = req.body.name.replace(/\s/g, "").toLowerCase();
     const options = req.body.options;
-    const ret = await ips.find({'options': options}, { sort: { score: 1 }, limit: 5 });
+    const numbers = req.body.numbers;
+    const ret = await ips.find({'options': options, 'numbers':numbers}, { sort: { score: 1 }, limit: 10 });
     var update = false;
     ret.forEach(async (element) => {
         if (element.name == name) {
             if (score > element.score) {
-                ips.findOneAndUpdate({'name': name, 'options': options, 'score': element.score}, { $set: { 'score': score} });
+                ips.findOneAndUpdate({'name': name, 'numbers':numbers, 'options': options, 'score': element.score}, { $set: { 'score': score} });
             }
             update = true;
         }
     });
     if (!update) {
-        if (ret.length < 5) {
-            ips.insert({'name': name, 'options': options, 'score': score});
+        if (ret.length < 10) {
+            ips.insert({'name': name, 'numbers':numbers, 'options': options, 'score': score});
         }
         else if (ret[0].score < score) {
-            ips.findOneAndUpdate({'name': ret[0].name, 'options': ret[0].options, 'score': ret[0].score}, { $set: {'name': name, 'options': options, 'score': score} });
+            ips.findOneAndUpdate({'name': ret[0].name, 'numbers':numbers, 'options': ret[0].options, 'score': ret[0].score}, { $set: {'name': name, 'options': options, 'score': score} });
         }
     }
     res.send(''+score);

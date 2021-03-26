@@ -59,6 +59,8 @@
             <div class="stats">
                 <h2>
                 </h2>
+                <h2>
+                </h2>
                 <div>
                     <div class="stats">
                         <div class="1wrapper wrapper">
@@ -106,6 +108,56 @@
                         </div>
                     </div>
                 </div>
+                <h2>
+                </h2>
+                <div>
+                    <div class="stats">
+                        <div class="6wrapper wrapper">
+                            <h2 class="leaderboard">6. </h2>
+                            <h2 class="leaderboard" id="6name">Buğra </h2>
+                        </div>
+                        <div class="6wrapper wrapper">
+                            <h2 class="leaderboard" id="6score">326</h2>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="7wrapper wrapper">
+                            <h2 class="leaderboard">7. </h2>
+                            <h2 class="leaderboard" id="7name">Buğra </h2>
+                        </div>
+                        <div class="7wrapper wrapper">
+                            <h2 class="leaderboard" id="7score">326</h2>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="8wrapper wrapper">
+                            <h2 class="leaderboard">8. </h2>
+                            <h2 class="leaderboard" id="8name">Buğra </h2>
+                        </div>
+                        <div class="8wrapper wrapper">
+                            <h2 class="leaderboard" id="8score">326</h2>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="9wrapper wrapper">
+                            <h2 class="leaderboard">9. </h2>
+                            <h2 class="leaderboard" id="9name">Buğra </h2>
+                        </div>
+                        <div class="9wrapper wrapper">
+                            <h2 class="leaderboard" id="9score">326</h2>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="10wrapper wrapper">
+                            <h2 class="leaderboard">10. </h2>
+                            <h2 class="leaderboard" id="10name">Buğra </h2>
+                        </div>
+                        <div class="10wrapper wrapper">
+                            <h2 class="leaderboard" id="10score">326</h2>
+                        </div>
+                    </div>
+                </div>
+                <h2>
                 </h2>
                 <h2>
                 </h2>
@@ -198,6 +250,7 @@
         var seconds = 120;
         var second_def = 60;
         var available_numbers = [1, 2, 3, 4, 5];
+        var sent_available_numbers = [1, 2, 3, 4, 5];
         var number_of_options = 3;
         var options = number_of_options;
         var points = 0;
@@ -254,6 +307,7 @@
             xhr.send(JSON.stringify({
                 'name': name,
                 'options': options,
+                'numbers': JSON.stringify(sent_available_numbers),
                 'score': score
             }));
         }
@@ -278,6 +332,7 @@
             $('#score').text('Puan ' + points);
             gen();
             options = number_of_options;
+            sent_available_numbers = available_numbers;
         }
 
         function getLeaderBoard() {
@@ -290,7 +345,7 @@
 
                 if (this.status == 200) {
                     var data = JSON.parse(this.responseText);
-                    for (let index = 0; index < 5; index++) {
+                    for (let index = 0; index < 10; index++) {
                         if (index >= data.length) {
                             $('.' + (index + 1) + 'wrapper').hide();
                         } else {
@@ -306,7 +361,8 @@
                 }
             };
             xhr.send(JSON.stringify({
-                'options': options
+                'options': options,
+                'numbers': JSON.stringify(sent_available_numbers)
             }));
         }
 
@@ -375,6 +431,7 @@
                     available_numbers.splice(index, 1);
                 }
             }
+            available_numbers.sort();
             gen();
         });
 
