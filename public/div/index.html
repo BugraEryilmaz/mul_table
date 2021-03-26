@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+
+<link rel="stylesheet" href="style.css">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="End">
+        <div class="stats">
+            <h2>
+            </h2>
+            <div class="timing">
+                <h2 class="timing_set">Süreyi belirleyin </h2>
+                <input class="timing_set timing_button" id="dk" type="tel" value="1">
+                <h2 class="timing_set">:</h2>
+                <input class="timing_set timing_button" id="sn" type="tel" value="00">
+            </div>
+            <h2>
+            </h2>
+        </div>
+        <div class="stats">
+            <h2>
+            </h2>
+            <h2 id="score_end">Puan 0
+            </h2>
+            <h2>
+            </h2>
+        </div>
+        <div class="HighScoreBefore">
+            <div class="stats">
+                <h2>
+                </h2>
+                <div class="timing">
+                    <h2 class="timing_set">İsminizi girin:
+                    </h2>
+                    <input class="timing_set name_field" id="name" type="text">
+                </div>
+                <h2>
+                </h2>
+            </div>
+            <div class="stats">
+                <h2>
+                </h2>
+                <button id="dont" type="button" class="HighScore">
+                    Puanımı gönderme
+                </button>
+                <button id="send" type="button" class="HighScore">
+                    Puanımı gönder
+                </button>
+                <h2>
+                </h2>
+            </div>
+        </div>
+        <div class="HighScoreAfter" hidden>
+            <div class="stats">
+                <h2>
+                </h2>
+                <h2>
+                </h2>
+                <div>
+                    <div class="stats">
+                        <div class="1wrapper wrapper">
+                            <img class="leaderboard" src="firstplace.png">
+                            <h2 class="leaderboard" id="1name">Buğra </h2>
+                        </div>
+                        <div class="1wrapper wrapper">
+                            <h2 class="leaderboard" id="1score">326</h2>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="2wrapper wrapper">
+                            <img class="leaderboard" src="secondplace.png">
+                            <h2 class="leaderboard" id="2name">Buğra </h2>
+                        </div>
+                        <div class="2wrapper wrapper">
+                            <h2 class="leaderboard" id="2score">326</h2>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="3wrapper wrapper">
+                            <img class="leaderboard" src="thirdplace.png">
+                            <h2 class="leaderboard" id="3name">Buğra </h2>
+                        </div>
+                        <div class="3wrapper wrapper">
+                            <h2 class="leaderboard" id="3score">326</h2>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="4wrapper wrapper">
+                            <h2 class="leaderboard">4. </h2>
+                            <h2 class="leaderboard" id="4name">Buğra </h2>
+                        </div>
+                        <div class="4wrapper wrapper">
+                            <h2 class="leaderboard" id="4score">326</h2>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="5wrapper wrapper">
+                            <h2 class="leaderboard">5. </h2>
+                            <h2 class="leaderboard" id="5name">Buğra </h2>
+                        </div>
+                        <div class="5wrapper wrapper">
+                            <h2 class="leaderboard" id="5score">326</h2>
+                        </div>
+                    </div>
+                </div>
+                <h2>
+                </h2>
+                <div>
+                    <div class="stats">
+                        <div class="6wrapper wrapper">
+                            <h2 class="leaderboard">6. </h2>
+                            <h2 class="leaderboard" id="6name">Buğra </h2>
+                        </div>
+                        <div class="6wrapper wrapper">
+                            <h2 class="leaderboard" id="6score">326</h2>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="7wrapper wrapper">
+                            <h2 class="leaderboard">7. </h2>
+                            <h2 class="leaderboard" id="7name">Buğra </h2>
+                        </div>
+                        <div class="7wrapper wrapper">
+                            <h2 class="leaderboard" id="7score">326</h2>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="8wrapper wrapper">
+                            <h2 class="leaderboard">8. </h2>
+                            <h2 class="leaderboard" id="8name">Buğra </h2>
+                        </div>
+                        <div class="8wrapper wrapper">
+                            <h2 class="leaderboard" id="8score">326</h2>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="9wrapper wrapper">
+                            <h2 class="leaderboard">9. </h2>
+                            <h2 class="leaderboard" id="9name">Buğra </h2>
+                        </div>
+                        <div class="9wrapper wrapper">
+                            <h2 class="leaderboard" id="9score">326</h2>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="10wrapper wrapper">
+                            <h2 class="leaderboard">10. </h2>
+                            <h2 class="leaderboard" id="10name">Buğra </h2>
+                        </div>
+                        <div class="10wrapper wrapper">
+                            <h2 class="leaderboard" id="10score">326</h2>
+                        </div>
+                    </div>
+                </div>
+                <h2>
+                </h2>
+                <h2>
+                </h2>
+            </div>
+
+        </div>
+        <div class="stats">
+            <h2>
+            </h2>
+            <button id="restart" type="button" class="answer_end">
+                Tekrar Oyna
+            </button>
+            <h2>
+            </h2>
+        </div>
+        <h2>
+            Kaç şık olsun?
+        </h2>
+        <div class="options">
+            <input type="radio" id="3Option" name="HowManyOptions" checked="True" class="numberofoptions">
+            <label for="3Option"> 3 </label>
+            <input type="radio" id="4Option" name="HowManyOptions" class="numberofoptions">
+            <label for="4Option"> 4 </label>
+            <input type="radio" id="5Option" name="HowManyOptions" class="numberofoptions">
+            <label for="5Option"> 5</label>
+        </div>
+
+    </div>
+    <div id="Game" hidden>
+        <div class="stats">
+            <button id="finish_game" name="finish" type="button" class="answer">Bitir</button>
+            <h2 id="score">Puan 0
+            </h2>
+            <h2 id="timer">2:00
+            </h2>
+        </div>
+        <div id="question_body">
+            <div id="question">
+                <h2>
+                </h2>
+                <h2 id="quest">56
+                </h2>
+                <h2>
+                </h2>
+            </div>
+
+            <div id="answers">
+                <button id="2" name="2" type="button" class="answer">A) 5</button>
+                <button id="3" name="3" type="button" class="answer">B) 10</button>
+                <button id="4" name="4" type="button" class="answer">C) 15</button>
+                <button id="5" name="5" type="button" class="answer three" hidden>D)25</button>
+                <button id="6" name="6" type="button" class="answer three four" hidden>E)35</button>
+            </div>
+        </div>
+    </div>
+    <div id="config">
+
+    </div>
+    <script type="text/javascript">
+
+        var correctaudio = new Audio('correct.mp3');
+        var wrong = new Audio('wrong.mp3');
+
+        var numbers = [];
+        var seconds = 120;
+        var second_def = 60;
+        var number_of_options = 3;
+        var options = number_of_options;
+        var points = 0;
+        var correct = 0;
+        var i = 0;
+
+        function ran(start, end) {
+            return Math.floor(Math.random() * (end - start)) + start;
+        }
+
+        function gen() {
+            numbers = [];
+            const second = ran(2, 6);
+            const third = ran(1, 11);
+            const first = second * third;
+            for (var i = 0; i < 4; i++) {
+                const second_loop = ran(1, 11);
+                const index = numbers.indexOf(second_loop);
+                if (!(index > -1 || third == second_loop))
+                    numbers.push(second_loop);
+                else
+                    i--;
+            }
+            numbers.splice(0, 0, first);
+            numbers.splice(1, 0, second);
+            const index = ran(0, number_of_options) + 2;
+            correct = index;
+            numbers.splice(index, 0, third);
+            write();
+        }
+
+        function write() {
+            $('#quest').text(numbers[0] + ' : ' + numbers[1]);
+            $('#2').text(numbers[2]);
+            $('#3').text(numbers[3]);
+            $('#4').text(numbers[4]);
+            $('#5').text(numbers[5]);
+            $('#6').text(numbers[6]);
+        }
+
+        function sendScore(name, score, options) {
+            var xhr = new XMLHttpRequest();
+            const URL = 'api/highscore';
+            xhr.open("POST", URL, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () {
+                if (this.readyState != 4) return;
+
+                if (this.status == 200) {
+                    $('.HighScoreBefore').hide();
+                    getLeaderBoard();
+                }
+            };
+            xhr.send(JSON.stringify({
+                'name': name,
+                'options': options,
+                'score': score
+            }));
+        }
+
+        function timeUp() {
+            $('#score_end').text('Puan ' + Math.floor(points));
+            $('#Game').hide();
+            $('#End').show();
+            $('.HighScoreBefore').show();
+            $('.HighScoreAfter').hide();
+        }
+
+        function Restart() {
+            $('#Game').show();
+            $('#End').hide();
+            seconds = second_def;
+            points = 0;
+            if ((seconds % 60) / 10 >= 1)
+                $('#timer').text(Math.floor(seconds / 60) + ':' + (seconds % 60));
+            else
+                $('#timer').text(Math.floor(seconds / 60) + ':0' + (seconds % 60));
+            $('#score').text('Puan ' + points);
+            gen();
+            options = number_of_options;
+        }
+
+        function getLeaderBoard() {
+            var xhr = new XMLHttpRequest();
+            const URL = 'api/highscoreget';
+            xhr.open("POST", URL, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () {
+                if (this.readyState != 4) return;
+
+                if (this.status == 200) {
+                    var data = JSON.parse(this.responseText);
+                    for (let index = 0; index < 10; index++) {
+                        if (index >= data.length) {
+                            $('.' + (index + 1) + 'wrapper').hide();
+                        } else {
+                            $('.' + (index + 1) + 'wrapper').show();
+                            $('#' + (index + 1) + 'name').text(data[index].name);
+                            $('#' + (index + 1) + 'score').text(data[index].score);
+
+                        }
+
+                    }
+                    $('.HighScoreAfter').show();
+                    // we get the returned data
+                }
+            };
+            xhr.send(JSON.stringify({
+                'options': options,
+            }));
+        }
+
+        gen();
+
+        $('.answer').click(() => {
+            const name = $(event.target).attr('name');
+            if (name == "finish") {
+                timeUp();
+                return;
+            }
+            const id = Number(name);
+            if (id == correct) {
+                points += 10 * 60 / second_def;
+                $('#question_body').css({ "border": "1vw solid green" });
+                correctaudio.play();
+            }
+            else {
+                points -= 5 * 60 / second_def;
+                $('#question_body').css({ "border": "1vw solid red" });
+                wrong.play();
+            }
+            $('#score').text('Puan ' + Math.floor(points));
+            gen();
+        });
+
+        $('.HighScore').click(() => {
+            if (event.target.id == 'send') {
+                const name = $('#name').val();
+                if (!name) {
+                    $('#name').css({ "border": "0.2vw solid red" });
+                    $('#name').attr("Title", "İsim boş olamaz!");
+                    return;
+                }
+                $('#name').css({ "border": "" });
+                $('#name').removeAttr("Title");
+                sendScore(name, Math.floor(points), options);
+            }
+            else {
+                $('.HighScoreBefore').hide();
+                getLeaderBoard();
+            }
+        });
+
+        $('#restart').click(() => {
+            if (second_def < 30) {
+                $('#sn').css({ "border": "0.2vw solid red" });
+                $('#sn').attr("Title", "En az 30 saniye!");
+                return;
+            }
+            else {
+                $('#sn').css({ "border": "" });
+                $('#sn').removeAttr("Title");
+            }
+            Restart();
+        });
+
+        $('.numberofoptions').change(() => {
+            const id = Number(event.target.id[0]);
+            if ($(event.target).is(':checked')) {
+                number_of_options = id;
+                if (id == 3) {
+                    $('.three').hide();
+                    console.log(3);
+                } else if (id == 4) {
+                    $('.three').show();
+                    $('.four').hide();
+                    console.log(4);
+                } else {
+                    $('.three').show();
+                    console.log(5);
+                }
+            }
+            gen();
+        });
+
+        $('.timing_set').change(() => {
+            second_def = Number($('#dk').val()) * 60 + Number($('#sn').val());
+        });
+
+        setInterval(() => {
+            seconds--;
+            if ((seconds % 60) / 10 >= 1)
+                $('#timer').text(Math.floor(seconds / 60) + ':' + (seconds % 60));
+            else
+                $('#timer').text(Math.floor(seconds / 60) + ':0' + (seconds % 60));
+
+            if (seconds < 1 && $('#End').is(":hidden"))
+                timeUp();
+        }, 1000);
+
+    </script>
+</body>
+
+</html>

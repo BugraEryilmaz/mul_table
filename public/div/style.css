@@ -1,0 +1,114 @@
+body{
+    max-width: 100%;
+}
+html {
+    height: 100%;
+    width: 100%;
+    background-image: url('hayri.jpeg');
+    background-size: 20%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+}
+
+#End {
+    margin-top: 5%;
+}
+
+#score_end {
+    font-size: 5vw;
+}
+
+.answer_end {
+    width: 20vw;   
+    height: 8vw;   
+    font-size: 3vw;
+    margin-bottom: 3%;
+}
+
+.HighScore {
+    width: 20vw;   
+    height: 4vw;   
+    font-size: 2vw;
+    margin-bottom: 6%;
+}
+
+#question_body {
+    display: grid;    
+    grid-template-columns: 100%;
+    
+    border: 1vw solid black; 
+}
+
+#question {
+    width: 70%;    
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: -3%;
+    margin-bottom: -3%;
+}
+
+.answer {
+    width: 12vw;   
+    height: 4vw;   
+    font-size: 3vw;
+}
+
+#answers {
+    width: 70%;    
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.stats {
+    font-size: 3vw;
+    min-width: 25vw;    
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: -4%;
+    margin-bottom: -4%;
+}
+
+.stats img {
+    width: 2.5vw;
+    min-width: 13pt;
+}
+
+#finish_game {
+    margin-top: 4%;
+}
+
+#quest {
+    font-size:10vw; 
+    color: black;
+}
+
+.timing {
+    text-align: center;
+}
+
+.timing_set, .leaderboard {
+    display:inline;
+}
+
+.leaderboard {
+    font-size: max(12pt, 2.5vw);
+    margin-top: -5%;
+}
+
+.timing_button {
+    max-width:10%; 
+    font-size: 5vw; 
+    
+}
+.name_field {
+    width:40%; 
+    font-size: 5vw; 
+    margin-bottom: 6%;
+}
+
+.HighScoreAfter {
+    margin-bottom: 5%;
+}

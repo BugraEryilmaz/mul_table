@@ -8,6 +8,7 @@ const PORT_NUMBER = process.env.PORT || 3000;
 const monk = require('monk');
 const db = monk(process.env.MONGODB_URI);
 const ips = db.get('scoreboard');
+const div = db.get('scoreboard_div');
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -44,6 +45,39 @@ app.post('/api/highscore', async (req, res) => {
         }
         else if (ret[0].score < score) {
             ips.findOneAndUpdate({'name': ret[0].name, 'numbers':numbers, 'options': ret[0].options, 'score': ret[0].score}, { $set: {'name': name, 'options': options, 'score': score} });
+        }
+    }
+    res.send(''+score);
+})
+
+app.post('/div/api/highscoreget', async (req, res) => {
+    const options = req.body.options;
+    const numbers = req.body.numbers;
+    const ret = await div.find({'options': options}, { sort: { score: -1 }, limit: 10 });
+    res.send(ret);
+})
+
+
+app.post('/div/api/highscore', async (req, res) => {
+    const score = req.body.score;
+    const name = req.body.name.replace(/\s/g, "").toLowerCase();
+    const options = req.body.options;
+    const ret = await div.find({'options': options}, { sort: { score: 1 }, limit: 10 });
+    var update = false;
+    ret.forEach(async (element) => {
+        if (element.name == name) {
+            if (score > element.score) {
+                div.findOneAndUpdate({'name': name, 'options': options, 'score': element.score}, { $set: { 'score': score} });
+            }
+            update = true;
+        }
+    });
+    if (!update) {
+        if (ret.length < 10) {
+            div.insert({'name': name, 'options': options, 'score': score});
+        }
+        else if (ret[0].score < score) {
+            div.findOneAndUpdate({'name': ret[0].name, 'options': ret[0].options, 'score': ret[0].score}, { $set: {'name': name, 'options': options, 'score': score} });
         }
     }
     res.send(''+score);
